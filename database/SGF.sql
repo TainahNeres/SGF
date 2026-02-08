@@ -1,0 +1,52 @@
+CREATE TABLE instituicao (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(150) NOT NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE campi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    instituicao_id INT NOT NULL,
+    nome VARCHAR(150) NOT NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_campi_instituicao
+        FOREIGN KEY (instituicao_id)
+        REFERENCES instituicao(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE setores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    campus_id INT NULL,
+    nome VARCHAR(150) NOT NULL,
+    padrao BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_setores_campus
+        FOREIGN KEY (campus_id)
+        REFERENCES campi(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE orcamentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    instituicao_id INT NULL,
+    campus_id INT NULL,
+    setor_id INT NULL,
+
+    valor_estimado DECIMAL(12,2) NOT NULL,
+    valor_disponivel DECIMAL(12,2) NOT NULL,
+    ano INT NOT NULL,
+
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (instituicao_id) REFERENCES instituicao(id),
+    FOREIGN KEY (campus_id) REFERENCES campi(id),
+    FOREIGN KEY (setor_id) REFERENCES setores(id)
+);
