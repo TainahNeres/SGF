@@ -5,7 +5,7 @@
     <title>SGF - Sistema de Gerenciamento Financeiro</title>
 </head>
 <body>
-    <h1>SGF</h1>
+    <h1>SGF - Sistema de Gerenciamento Financeiro</h1>
 
     <nav>
         <a href="{{ route('instituicoes.index') }}">Instituições</a> |
@@ -17,5 +17,12 @@
     <hr>
 
     @yield('content')
+
+    <hr>
+
+    <footer>
+        <p>&copy; {{ date('Y') }} SGF - Sistema de Gerenciamento Financeiro</p>
+        <a href="https://portal.ifba.edu.br/seabra">IFBA campus Seabra</a>
+    </footer>
 </body>
 </html>

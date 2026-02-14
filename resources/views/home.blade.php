@@ -4,5 +4,5 @@
 
 @section('content')
     <h1>Página inicial</h1>
-    <p>Template base Laravel funcionando.</p>
+    <p>Aqui deve estar contido um breve texto sobre: o que o site faz, quem desenvolveu, etc</p>
 @endsection
